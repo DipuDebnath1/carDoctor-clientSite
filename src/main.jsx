@@ -7,6 +7,10 @@ import Home from './components/home/Home.jsx'
 import Login from './components/login/Login.jsx'
 import Register from './components/register/Register.jsx'
 import AuthProvider from './providers/AuthProvider.jsx'
+import Checkout from './components/checkout/Checkout.jsx'
+import BookService from './components/bookservice/BookService.jsx'
+import Bookings from './components/booking/Bookings.jsx'
+import PrivetRoute from './privet/PrivetRoute.jsx'
 
 
 
@@ -27,6 +31,22 @@ const router = createBrowserRouter([
         path: '/signup',
         element: <Register></Register>,
       },
+      {
+        path: '/bookservice/:id',
+        element: <PrivetRoute><BookService></BookService></PrivetRoute>,
+        // element: <BookService></BookService>,
+        loader: ({params})=>fetch(`http://localhost:5000/service/${params.id}`)
+      },
+      {
+        path: '/checkout/:id',
+        element: <Checkout></Checkout>,
+        loader:({params})=> fetch(`http://localhost:5000/service/${params.id}`)
+      },
+      {
+        path: '/booking',
+        element: <PrivetRoute><Bookings></Bookings></PrivetRoute>,
+      },
+     
     ])
   }
 ])
